@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Custom styles */
+        body {
+            background-image: url('{% static "image/pv_bg.jpg" %}');
+            background-size: cover;
+            background-position: center;
+        }
+        /* Custom light teal color */
+        .custom-light-teal {
+            background-color: #66b2b2;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <nav class="flex items-center justify-between flex-wrap custom-light-teal bg-opacity-75 p-6 shadow-lg">
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+            <span class="font-bold font-serif text-3xl tracking-tight">Adventures Awaits</span>
+        </div>
+        <div class="block lg:hidden">
+            <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+            </button>
+        </div>
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+            <div class="text-sm lg:flex-grow">
+                <a href="../user_home" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300 mr-4">
+                    <i class="fa fa-home mr-2"></i>Home
+                </a>
+                <a href="../create_post" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300 mr-4">
+                    Create Post
+                </a>
+                <a href="../view_post" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300 mr-4">
+                    View Post
+                </a>
+                <a href="../user_feedback" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300">
+                    Feedback
+                </a>
+            </div>
+            <div class="flex items-center mt-4 lg:mt-0">
+                <a href="../logout" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:bg-white hover:text-black mt-4 lg:mt-0 ml-4 transition duration-300">
+                    <i class="fa fa-sign-out mr-2"></i>Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- View Post -->
+    <div class="container mx-auto px-4 my-6">
+        <div class="bg-white shadow-sm rounded-lg border border-slate-200">
+            <div class="flex flex-wrap">
+                {% for i in data %}
+                <div class="w-full flex items-center p-4 border-b border-slate-200">
+                    <img src="{{ i.image.url }}" alt="card-image" class="object-cover w-20 h-20 rounded-md mr-4" />
+                    <div class="flex-grow">
+                        <h6 class="text-slate-800 text-xl font-serif font-semibold">{{ i.title }}, {{ i.place }}</h6>
+                        <p class="text-slate-600 leading-normal font-light">{{ i.content }}</p>
+                    </div>
+                    <div class="flex space-x-2 mt-2"> <!-- Added margin-top here for spacing -->
+                        <a href="{% url 'update_post' i.id %}" class="rounded-full bg-green-600 py-2 px-6 text-sm text-white transition-all hover:bg-green-400">
+                            Update
+                        </a>
+                        <button class="rounded-full bg-red-600 py-2 px-6 text-sm text-white transition-all hover:bg-red-400" onclick="deletePost({{ i.id }})">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- /View Post -->
+
+    <script>
+        function deletePost(postId) {
+            if (confirm("Are you sure you want to delete this post?")) {
+                fetch(`/api/delete_post/${postId}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Post deleted successfully");
+                        window.location.reload();  // Reload the page to see changes
+                    } else {
+                        alert("Error deleting post");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("Error deleting post");
+                });
+            }
+        }
+        </script>
+
+</body>
+</html>

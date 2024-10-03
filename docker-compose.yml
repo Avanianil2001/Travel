@@ -1,0 +1,19 @@
+version: '3.12'
+
+services:
+  app:
+    image: python:3.12
+    container_name: Project_Travel
+    working_dir: /Travel
+    volumes:
+      - .:/Travel
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DEBUG=1
+      - DJANGO_SECRET_KEY=supersecretkey
+    ports:
+      - "8000:8000"  # Expose the Django app on port 8000
+

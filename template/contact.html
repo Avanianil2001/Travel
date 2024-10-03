@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zxx">
+{% load static %}
+
+<head>
+	<title>View Feedback-Travel Blog Website</title>
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<meta name="keywords" content="Travel Tours Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"
+	/>
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!--// Meta tag Keywords -->
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+	<!-- Custom-Files -->
+	<link rel="stylesheet" href="{%static 'css/style.css' %}" type="text/css" media="all" />
+	<!-- Style-CSS -->
+	<link href="{%static 'css/font-awesome.css' %}" rel="stylesheet">
+	<!-- Font-Awesome-Icons-CSS -->
+	<!-- //Custom-Files -->
+
+	<!-- Web-Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Pacifico&amp;subset=cyrillic,latin-ext,vietnamese" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Amaranth:400,400i,700,700i" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<!-- //Web-Fonts -->
+
+</head>
+
+<body>
+	<!-- header -->
+	<div class="header-w3l">
+		<!-- navigation -->
+		<div class="nav-agile">
+			<nav class="bg-gradient-to-r from-gray-300 to-blue-500 shadow-lg py-4">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div class="flex justify-between items-center h-12"> <!-- Changed h-16 to h-12 -->
+						<div class="flex-shrink-0">
+							<h1 class="text-4xl font-serif font-bold text-gray-800">
+								<a href="../home">Adventures Await</a>
+							</h1>
+						</div>
+						<div class="md:flex space-x-4"> <!-- Keep space-x-4 for closer buttons -->
+							<!-- Rounded buttons with white border and text -->
+							<a href="../home" class="rounded-full border-2 border-white text-white py-2 px-4 font-semibold text-xs hover:bg-white hover:text-black transition duration-200">Home</a>
+							<a href="../about" class="rounded-full border-2 border-white text-white py-2 px-4 font-semibold text-xs hover:bg-white hover:text-black transition duration-200">About</a>
+							<a href="../gallery" class="rounded-full border-2 border-white text-white py-2 px-4 font-semibold text-xs hover:bg-white hover:text-black transition duration-200">Gallery</a>
+							<a href="../feedback" class="rounded-full border-2 border-white text-white py-2 px-4 font-semibold text-xs hover:bg-white hover:text-black transition duration-200">Feedback</a>
+						</div>
+						<div class="flex space-x-4">
+							<!-- Buttons for login and register with hover effect -->
+							<a href="../register" class="rounded-full border-2 border-white text-white py-2 px-4 hover:bg-white hover:text-black transition duration-200 font-semibold text-xs">
+								<i class="fa fa-pencil mr-2"></i>Register
+							</a>
+							<a href="../login" class="rounded-full border-2 border-white text-white py-2 px-4 hover:bg-white hover:text-black transition duration-200 font-semibold text-xs">
+								<i class="fa fa-sign-in mr-2"></i>Login
+							</a>
+						</div>
+					</div>
+				</div>
+			</nav>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- //navigation -->
+	<!--//header-->
+
+	<!-- banner -->
+	<div class="inner_banner_agile">
+
+	</div>
+	<!--//banner -->
+	<!-- short -->
+	<div class="services-breadcrumb">
+		<div class="inner_breadcrumb">
+			<ul class="short_ls">
+				<li>
+					<a href="../home">Home</a>
+					<span>/ /</span>
+				</li>
+				<li>Feedback</li>
+			</ul>
+		</div>
+	</div>
+	<!-- //short-->
+	<!-- //banner -->
+
+	<!-- feedback -->
+	<div class="testimonials py-12 bg-gray-100">
+		<div class="container mx-auto px-4">
+			<h3 class="title text-3xl font-normal text-center mb-8">What Our Clients Say</h3>
+			<div class="w3_testimonials_grids">
+				<section class="slider">
+					<div class="flexslider">
+						<ul class="slides space-y-6">
+							{% for i in feedback %}
+							<li>
+								<div class="w3_testimonials_grid bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+									{% if i.user_details.pro_pic %}
+										<img src="{{ i.user_details.pro_pic.url }}" alt="Profile Picture" class="img-responsive w-20 h-20 rounded-full object-cover mb-4">
+									{% else %}
+										<img src="{% static 'image/user-profile.png' %}" alt="Default Profile Picture" class="img-responsive w-20 h-20 rounded-full object-cover mb-4">
+									{% endif %}
+									<h4 class="text-lg italic text-gray-800">
+										<i>{{ i.feedback }}</i>
+									</h4>
+									<h5 class="font-semibold text-gray-900">{{ i.user_details.first_name }} {{ i.user_details.last_name }}</h5>
+									<p class="text-gray-500">{{ i.user_details.email }}</p>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+
+<!-- //feedback -->
+
+
+<!-- copyright -->
+	<div class="copy-section bg-gray-800 py-4">
+		<p class="text-center text-gray-400 text-sm">
+			© 2024 Adventures Await. All rights reserved. | Designed by
+			<a href="" class="text-blue-500 hover:underline">Avani V</a>
+		</p>
+	</div>
+	<!-- //copyright -->
+
+
+	<!-- Js files -->
+	<!-- JavaScript -->
+	<script src="{%static 'js/jquery-2.2.3.min.js' %}"></script>
+	<!-- Default-JavaScript-File -->
+	<script src="{%static 'js/bootstrap.js' %}"></script>
+	<!-- Necessary-JavaScript-File-For-Bootstrap -->
+
+	<!-- smooth scrolling -->
+	<script src="{%static 'js/SmoothScroll.min.js' %}"></script>
+	<!-- //smooth scrolling -->
+
+	<!-- start-smoth-scrolling -->
+	<script src="{%static 'js/move-top.js' %}"></script>
+	<script src="{%static 'js/easing.js' %}"></script>
+	<script>
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+	</script>
+	<!-- start-smoth-scrolling -->
+
+	<!-- smooth scrolling-bottom-to-top -->
+	<script>
+		$(document).ready(function () {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+		});
+	</script>
+	<a href="#" id="toTop" style="display: block;">
+		<span id="toTopHover" style="opacity: 1;"> </span>
+	</a>
+	<!-- //smooth scrolling-bottom-to-top -->
+	<!-- //Js files -->
+
+</body>
+
+</html>

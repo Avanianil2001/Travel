@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Custom styles */
+        body {
+            background-image: url('{% static "image/uh_bg3.jpeg" %}');
+            background-size: cover;
+            background-position: center;
+
+        }
+        /* Custom light teal color */
+        .custom-light-teal {
+            background-color: #66b2b2; /* Custom light teal color */
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <nav class="flex items-center justify-between flex-wrap custom-light-teal bg-opacity-75 p-6 shadow-lg">
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+            <span class="font-bold font-serif text-3xl tracking-tight">Adventures Await</span>
+        </div>
+        <div class="block lg:hidden">
+            <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+            </button>
+        </div>
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+            <div class="text-sm lg:flex-grow">
+                <a href="../create_post" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300 mr-4">
+                    Create Post
+                </a>
+                <a href="../view_post" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300 mr-4">
+                    View Post
+                </a>
+                <a href="../user_feedback" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300">
+                    Feedback
+                </a>
+            </div>
+            <div class="flex items-center mt-4 lg:mt-0">
+                <a href="../profile" class="flex items-center">
+                    {% if user.pro_pic %}
+                        <img src="{{ user.pro_pic.url }}" alt="Profile Picture" class="w-12 h-12 rounded-full"> <!-- User's profile picture -->
+                    {% else %}
+                        <img src="{% static 'images/user-profile.png' %}" alt="Profile Icon" class="w-12 h-12 rounded-full"> <!-- Default profile picture -->
+                    {% endif %}
+                    <span class="text-xl font-serif font-semibold ml-2">{{ user.first_name }} {{ user.last_name }}</span> <!-- Display user's name -->
+                </a>
+                <a href="../logout" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:bg-white hover:text-black mt-4 lg:mt-0 ml-4 transition duration-300">
+                    <i class="fa fa-sign-out mr-2"></i>Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="container mx-auto flex-grow flex flex-col items-center justify-center text-center">
+        <p class="text-2xl text-orange-300 font-medium font-mono max-w-md mb-8 uppercase"> <!-- Changed text color here -->
+            Manage your profile, create new blog posts, view and edit your existing posts, and share feedback with us.
+        </p>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Custom styles */
+        body {
+            background-image: url('{% static "image/cp_bg1.jpg" %}');
+            background-size: cover;
+            background-position: center;
+        }
+        /* Custom light teal color */
+        .custom-light-teal {
+            background-color: #66b2b2;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <nav class="flex items-center justify-between flex-wrap custom-light-teal bg-opacity-75 p-6 shadow-lg">
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+            <span class="font-bold font-serif text-3xl tracking-tight">Adventures Await</span>
+        </div>
+        <div class="block lg:hidden">
+            <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+            </button>
+        </div>
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+            <div class="text-sm lg:flex-grow">
+                <a href="../user_home" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300 mr-4">
+                    <i class="fa fa-home mr-2"></i>Home
+                </a>
+                <a href="../create_post" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300 mr-4">
+                    Create Post
+                </a>
+                <a href="../view_post" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300 mr-4">
+                    View Post
+                </a>
+                <a href="../user_feedback" class="inline-block mt-4 lg:inline-block lg:mt-0 rounded-full border border-white text-white bg-teal-600 hover:bg-white hover:text-black px-4 py-2 transition duration-300">
+                    Feedback
+                </a>
+            </div>
+            <div class="flex items-center mt-4 lg:mt-0">
+                <a href="../logout" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:bg-white hover:text-black mt-4 lg:mt-0 ml-4 transition duration-300">
+                    <i class="fa fa-sign-out mr-2"></i>Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!--post creation-->
+    <div class="flex flex-col justify-center font-[sans-serif] p-4">
+        <div class="max-w-md w-full mx-auto shadow-[0_2px_10px_-2px_rgba(195,169,50,0.5)] p-8 relative mt-12">
+
+            <form action="" method="post" enctype="multipart/form-data" class="mt-12">
+                {% csrf_token %}
+                <h3 class="text-xl font-bold text-orange-500 mb-8 text-center">CREATE POST</h3>
+                <div class="space-y-4">
+                    <input name="title" type="text" class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" placeholder="Enter Suitable Title" required />
+                    <input name="place" type="text" class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" placeholder="Located Place" required />
+                    <textarea name="description" class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" placeholder="Enter Description" required></textarea>
+                    <input name="picture" type="file" class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" required />
+                </div>
+                <button type="submit" class="mt-4 w-full bg-orange-500 text-white font-bold py-2 rounded hover:bg-orange-600 transition duration-300">Submit</button>
+            </form>
+
+        </div>
+    </div>
+    <!--/post creation-->
+
+</body>
+</html>
